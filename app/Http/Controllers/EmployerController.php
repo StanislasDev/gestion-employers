@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployerRequest;
 use App\Models\Departement;
 use App\Models\Employer;
+use Exception;
 use Illuminate\Http\Request;
 
 class EmployerController extends Controller
@@ -32,10 +33,16 @@ class EmployerController extends Controller
      */
     public function store(StoreEmployerRequest $request)
     {
+
+        try {
+            
         // dd($request);
         Employer::create($request->all());
 
         return redirect()->route('employer.index')->with('success_message', 'Employer créer avec succès!');
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -49,24 +56,46 @@ class EmployerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Employer $employer)
     {
-        return view('employers.edit');
+        // dd($employer);
+        $departements = Departement::all();
+        return view('employers.edit', compact('employer','departements'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Employer $employer)
     {
-        //
+        $request->validate([
+            'departement_id' => 'required|integer',
+            'nom' => 'required|string',
+            'prenaom' => 'required|string',
+            'email' => 'required|email',
+            'contact' => 'required|numeric|min:9',
+            'montant_journalier' => 'required|min:3'
+        ]);
+        try {
+        $employer->update($request->all());
+
+        return redirect()->route('employer.index')->with('success_message', 'Employer correctement modifié!');
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Employer $employer)
     {
-        //
+        try {
+            $employer->delete();
+    
+            return redirect()->route('employer.index')->with('success_message', 'Employer Supprimé!');
+            } catch (Exception $e) {
+                dd($e);
+            }
     }
 }

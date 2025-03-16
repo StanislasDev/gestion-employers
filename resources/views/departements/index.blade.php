@@ -40,6 +40,9 @@
                 </div><!--//col-auto-->
             </div><!--//row-->
 
+            @if (Session::get('success_message'))
+                <div class="alert alert-success">{{ Session::get('success_message') }}</div>
+            @endif
 
             <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
                 <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab"
@@ -73,7 +76,7 @@
                                                     <form action="{{ route('departement.delete', $departement->id) }}">
                                                         @csrf
                                                         <button class="btn-sm app-btn-secondary"
-                                                            type="submit">Supprimer</button>
+                                                            type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
                                                     </form>
                                                 </td>
                                             </tr>

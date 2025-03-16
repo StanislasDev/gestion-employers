@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function(){
         Route::get('/create', [EmployerController::class, 'create'])->name('employer.create');
         Route::post('/create', [EmployerController::class, 'store'])->name('employer.store');
         Route::get('/edit/{employer}', [EmployerController::class, 'edit'])->name('employer.edit');
+        Route::put('/update/{employer}', [EmployerController::class, 'update'])->name('employer.update');
+        Route::get('/{employer}', [EmployerController::class, 'destroy'])->name('employer.delete');
     });
 });
 

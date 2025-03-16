@@ -84,9 +84,16 @@
                                                 <td class="cell"><span>{{ $employer->email }}</span></td>
                                                 <td class="cell"><span>{{ $employer->contact }}</span></td>
                                                 <td class="cell"><span class="badge bg-info">{{ $employer->departement->name }}</span></td>
-                                                <td class="cell"><span class="badge bg-success">{{ $employer->montant_journalier * 30 }}</span></td>
-                                                <td class="cell"><a class="btn-sm app-btn-secondary"
-                                                        href="#">View</a></td>
+                                                <td class="cell"><span class="badge bg-success">{{ $employer->montant_journalier * 30 }} Fcfa</span></td>
+                                                <td class="d-flex">
+                                                    <a class="btn-sm app-btn-secondary mx-2"
+                                                        href="{{ route('employer.edit', $employer->id) }}">Modifier</a>
+                                                    <form action="{{ route('employer.delete', $employer->id) }}">
+                                                        @csrf
+                                                        <button class="btn-sm app-btn-secondary"
+                                                            type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>

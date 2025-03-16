@@ -7,7 +7,7 @@
         <div class="row g-4 settings-section">
             <div class="col-12 col-md-4">
                 <h3 class="section-title">Ajouter</h3>
-                <div class="section-intro">Ajputer ici un nouvel emplpoyer.</div>
+                <div class="section-intro">Vous êtes sur le point de créer un nouvel employer.</div>
             </div>
             <div class="col-12 col-md-8">
                 <div class="app-card app-card-settings shadow-sm p-4">
@@ -23,7 +23,7 @@
                                     <option value=""></option>
 
                                     @foreach ($departements as $departement)
-                                        <option value="{{ $departement->id }}">{{ $departement->name }}</option>
+                                        <option value="{{ $departement->id }}" {{ $employer->departement_id === $departement->id ? 'selected':'' }}>{{ $departement->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('departement_id')
@@ -35,7 +35,7 @@
                                 <label for="setting-input-1" class="form-label">Nom<span class="ms-2"
                                         data-bs-container="body" data-bs-toggle="popover" data-bs-trigger="hover focus"
                                         data-bs-placement="top"
-                                        data-bs-content="This is a Bootstrap popover example. You can use popover to provide extra info."><svg
+                                        data-bs-content="Veuillez remplire le formulaire d'édition."><svg
                                             width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle"
                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
@@ -66,16 +66,16 @@
                                     @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="setting-input-3" class="form-label">Contact</label>
-                                <input type="text" class="form-control" id="setting-input-3" value="{{ old('contact') }}" name="contact"
+                                <label for="setting-input-4" class="form-label">Contact</label>
+                                <input type="text" class="form-control" id="setting-input-4" value="{{ old('contact') }}" name="contact"
                                     placeholder="+237 650 256 421">
                                     @error('contact')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="setting-input-3" class="form-label">Montant journalier</label>
-                                <input type="number" class="form-control" id="setting-input-3" value="{{ old('montant_journalier') }}" name="montant_journalier"
+                                <label for="setting-input-5" class="form-label">Montant journalier</label>
+                                <input type="number" class="form-control" id="setting-input-5" value="{{ old('montant_journalier') }}" name="montant_journalier"
                                     placeholder="Montant journalier de l'employer">
                                     @error('montant_journalier')
                                         <div class="text-danger">{{ $message }}</div>
