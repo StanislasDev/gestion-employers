@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployerRequest;
+use App\Models\Departement;
 use App\Models\Employer;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        $employers = Employer::paginate(10);
+        $employers = Employer::with('departement')->paginate(10);
         return view('employers.index', compact('employers'));
     }
 
@@ -21,15 +23,19 @@ class EmployerController extends Controller
      */
     public function create()
     {
-        return view('employers.create');
+        $departements = Departement::all();
+        return view('employers.create', compact('departements'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreEmployerRequest $request)
     {
-        //
+        // dd($request);
+        Employer::create($request->all());
+
+        return redirect()->route('employer.index')->with('success_message', 'Employer créer avec succès!');
     }
 
     /**

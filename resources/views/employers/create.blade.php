@@ -13,7 +13,7 @@
                 <div class="app-card app-card-settings shadow-sm p-4">
 
                     <div class="app-card-body">
-                        <form class="settings-form" method="POST">
+                        <form class="settings-form" action="{{ route('employer.store') }}" method="POST">
                             @csrf
                             @method('POST')
                             
@@ -21,7 +21,14 @@
                                 <label for="setting-input-4" class="form-label">Département</label>
                                 <select name="departement_id" id="departement_id" class="form-control">
                                     <option value=""></option>
+
+                                    @foreach ($departements as $departement)
+                                        <option value="{{ $departement->id }}">{{ $departement->name }}</option>
+                                    @endforeach
                                 </select>
+                                @error('departement_id')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
@@ -37,17 +44,42 @@
                                                 d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z" />
                                             <circle cx="8" cy="4.5" r="1" />
                                         </svg></span></label>
-                                <input type="text" class="form-control" id="setting-input-1" name="first_name" placeholder="Entre le nom"
+                                <input type="text" class="form-control" id="setting-input-1" value="{{ old('nom') }}" name="nom" placeholder="Entre le nom"
                                     required>
+                                    @error('nom')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="setting-input-2" class="form-label">Prénom</label>
-                                <input type="text" class="form-control" id="setting-input-2" name="last_name" placeholder="Entrer le Prénom" required>
+                                <input type="text" class="form-control" id="setting-input-2" value="{{ old('prenaom') }}" name="prenaom" placeholder="Entrer le Prénom" required>
+                                @error('prenaom')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="mb-3">
                                 <label for="setting-input-3" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="setting-input-3" name="email"
+                                <input type="email" class="form-control" id="setting-input-3" value="{{ old('email') }}" name="email"
                                     placeholder="Email@mail.com">
+                                    @error('email')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="setting-input-3" class="form-label">Contact</label>
+                                <input type="text" class="form-control" id="setting-input-3" value="{{ old('contact') }}" name="contact"
+                                    placeholder="+237 650 256 421">
+                                    @error('contact')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="setting-input-3" class="form-label">Montant journalier</label>
+                                <input type="number" class="form-control" id="setting-input-3" value="{{ old('montant_journalier') }}" name="montant_journalier"
+                                    placeholder="Montant journalier de l'employer">
+                                    @error('montant_journalier')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                             </div>
                             
                             <button type="submit" class="btn app-btn-primary">Enregister</button>

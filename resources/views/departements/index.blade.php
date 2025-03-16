@@ -53,13 +53,12 @@
                     <div class="app-card app-card-orders-table shadow-sm mb-5">
                         <div class="app-card-body">
                             <div class="table-responsive">
-                                <table class="table app-table-hover mb-0 text-left">
+                                <table class="table mb-0">
                                     <thead>
                                         <tr>
                                             <th class="cell">#</th>
                                             <th class="cell">Nom</th>
                                             <th class="cell">Action</th>
-                                            <th class="cell"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -68,7 +67,7 @@
                                                 <td class="cell"><span class="truncate">{{ $departement->id }}</span></td>
                                                 <td class="cell"><span class="truncate">{{ $departement->name }}</span>
                                                 </td>
-                                                <td class="nav flex-sm-row mb-2 ">
+                                                <td class="d-flex">
                                                     <a class="btn-sm app-btn-secondary mx-2"
                                                         href="{{ route('departement.edit', $departement->id) }}">Modifier</a>
                                                     <form action="{{ route('departement.delete', $departement->id) }}">
