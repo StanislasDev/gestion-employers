@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ConfigurationController;
 use App\Http\Controllers\DepartementController;
 use App\Http\Controllers\EmployerController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,16 @@ Route::middleware('auth')->group(function(){
         Route::get('/edit/{employer}', [EmployerController::class, 'edit'])->name('employer.edit');
         Route::put('/update/{employer}', [EmployerController::class, 'update'])->name('employer.update');
         Route::get('/{employer}', [EmployerController::class, 'destroy'])->name('employer.delete');
+    });
+
+    Route::prefix('configurations')->group(function(){
+        Route::get('/', [ConfigurationController::class, 'index'])->name('configuration');
+        Route::get('/create', [ConfigurationController::class, 'create'])->name('configuration.create');
+
+        // Enregistrer les informations de la configuration
+        Route::post('/create', [ConfigurationController::class, 'store'])->name('configuration.store');
+        // Supprimer la configuration 
+        Route::get('/{configuration}', [ConfigurationController::class, 'delete'])->name('configuration.delete');
     });
 });
 
